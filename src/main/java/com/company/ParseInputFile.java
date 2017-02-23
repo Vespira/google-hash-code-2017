@@ -33,6 +33,12 @@ public class ParseInputFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        situation.setVideoList(videoList);
+        situation.setEndpointList(endpointList);
+        situation.setRequestList(requestList);
+        situation.setCacheList(cacheList);
+        System.out.println("DONE");
     }
 
     public void parseLine(String line) {
@@ -45,18 +51,21 @@ public class ParseInputFile {
             case 0:
                 videoList = new ArrayList<>();
                 for(int i = 0; i < Integer.valueOf(splittedCharacters[0]); i++) {
-                    
+                    videoList.add(new Video(i, 0));
                 }
                 endpointList = new HashMap<>(Integer.valueOf(splittedCharacters[1]));
+                for(int i = 0; i < Integer.valueOf(splittedCharacters[1]); i++) {
+                    endpointList.put(i, new Endpoint(i, null, 0));
+                }
                 requestList = new ArrayList<>(Integer.valueOf(splittedCharacters[2]));
+                for(int i = 0; i < Integer.valueOf(splittedCharacters[2]); i++) {
+                    requestList.add(new Request(null, 0, null));
+                }
                 cacheList = new HashMap<>(Integer.valueOf(splittedCharacters[3]));
                 for(int i = 0; i < Integer.valueOf(splittedCharacters[3]); i++) {
                     cacheList.put(i, new Cache(i, Integer.valueOf(splittedCharacters[4])));
                 }
-                situation.setVideoList(videoList);
-                situation.setEndpointList(endpointList);
-                situation.setRequestList(requestList);
-                situation.setCacheList(cacheList);
+
                 break;
             //cas des tailles des vidéos
             case 1:
