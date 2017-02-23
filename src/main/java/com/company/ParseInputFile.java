@@ -24,7 +24,7 @@ public class ParseInputFile {
     private int lineNumber = 0;
     private int nextEndpointLines = 0;
 
-    public void parseFile(String path) {
+    public Situation parseFile(String path) {
 
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
 
@@ -39,6 +39,7 @@ public class ParseInputFile {
         situation.setRequestList(requestList);
         situation.setCacheList(cacheList);
         System.out.println("DONE");
+        return situation;
     }
 
     public void parseLine(String line) {

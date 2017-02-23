@@ -17,16 +17,14 @@ public class FileWriter {
             throws IOException {
         Path path = Paths.get(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-            writer.write(resultat.size());
+            writer.write(String.valueOf(resultat.size()));
             for ( Map.Entry<Cache,List<Video>> entry : resultat.entrySet() ) {
                 writer.newLine();
-                writer.write(entry.getKey().getId());
+                writer.write(String.valueOf(entry.getKey().getId()));
                 for ( Video v : entry.getValue() ) {
                     writer.write(" "+v.getId());
                 }
             }
-
-            writer.write("print('Hello World');");
         }
 
     }
