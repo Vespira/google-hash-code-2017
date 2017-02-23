@@ -9,18 +9,21 @@ import java.util.Map;
 
 public class Main {
 
-    /*static final String BASE_PATH_IN = "/home/mfreche/workspace/github/git/google-hash-code-2017/src/main/resources/";
-    static final String BASE_PATH_OUT = "/home/mfreche/";*/
-    static final String BASE_PATH_IN = "D:/workspace/google-hash-code-2017/src/main/resources/";
-    static final String BASE_PATH_OUT = "D:/out";
+    static final String BASE_PATH_IN = "/home/mfreche/workspace/github/git/google-hash-code-2017/src/main/resources/";
+    static final String BASE_PATH_OUT = "/home/mfreche/";
+    /*static final String BASE_PATH_IN = "D:/workspace/google-hash-code-2017/src/main/resources/";
+    static final String BASE_PATH_OUT = "D:/out";*/
 
     public static void main(String[] args)
             throws IOException {
 
         IAlgo algo = new Algo1(20 * 1000);
         //fichierSample(algo);
-
-        fichierReel(algo, "kittens.in");
+        fichierReel(algo, "sampleFile.in");
+        //fichierReel(algo, "kittens.in");
+        /*fichierReel(algo, "me_at_the_zoo.in");
+        fichierReel(algo, "trending_today.in");
+        fichierReel(algo, "videos_worth_spreading.in");*/
 
 
     }
