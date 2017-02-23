@@ -10,6 +10,8 @@ import java.util.Map;
 @AllArgsConstructor
 public class Endpoint {
 
+    int id;
+
     /**
      * Id cache -> latence
      */
