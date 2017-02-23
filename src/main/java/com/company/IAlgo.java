@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -7,6 +8,6 @@ import java.util.Map;
  */
 public interface IAlgo {
 
-    Map<Cache, Video> trouveMeilleurSolution(Situation situation);
+    Map<Cache, List<Video>> trouveMeilleurSolution(Situation situation);
 
 }
