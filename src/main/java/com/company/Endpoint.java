@@ -3,6 +3,7 @@ package com.company;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -17,7 +18,7 @@ public class Endpoint {
     /**
      * Id cache -> latence
      */
-    Map<Cache, Integer> cacheConnexions;
+    Map<Cache, Integer> cacheConnexions = new HashMap<>();
 
     Integer latencyToDataCenter;
 

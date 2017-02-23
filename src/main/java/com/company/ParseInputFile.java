@@ -23,6 +23,10 @@ public class ParseInputFile {
 
     private int lineNumber = 0;
     private int nextEndpointLines = 0;
+    private int indexEndpoint = 0;
+    boolean newEndpoint = true;
+    private boolean requestLine = false;
+    private int requestIndex = 0;
 
     public Situation parseFile(String path) {
 
@@ -47,7 +51,6 @@ public class ParseInputFile {
         String[] splittedCharacters = line.split(" ");
 
         switch(lineNumber) {
-
             //cas du nombre d'éléments
             case 0:
                 videoList = new ArrayList<>();
@@ -76,16 +79,34 @@ public class ParseInputFile {
                 break;
             //cest parti pour les endpoints
             default:
-                if(lineNumber==2) {
-                    endpointList.put(0, new Endpoint(0, new HashMap<>(), 0));
+                if(newEndpoint == true) {
+                    endpointList.put(indexEndpoint, new Endpoint(indexEndpoint, new HashMap<Cache, Integer>(), Integer.valueOf(splittedCharacters[0])));
                     nextEndpointLines = Integer.valueOf(splittedCharacters[1]);
+                    newEndpoint = false;
+                    //si les endpoints sont finis
+                    if(endpointList.size() == indexEndpoint + 1) {
+                        requestLine = true;
+                    }
+                    indexEndpoint++;
                 } else {
-                    if(nextEndpointLines > 0) {
-                        endpointList.get(Integer.valueOf(splittedCharacters[0])).setLatencyToDataCenter(Integer.valueOf(splittedCharacters[1]));
+                    if(nextEndpointLines == 0) {
+                        newEndpoint = true;
+                    } else {
+                        endpointList.get(indexEndpoint).getCacheConnexions().put(
+                                cacheList.get(Integer.valueOf(splittedCharacters[0])),
+                                Integer.valueOf(splittedCharacters[1])
+                        );
                         nextEndpointLines--;
                     }
                 }
-
+                if(requestLine == true) {
+                    requestList.add(requestIndex, new Request(
+                            endpointList.get(Integer.valueOf(splittedCharacters[1])),
+                            Integer.valueOf(splittedCharacters[2]),
+                            videoList.get(Integer.valueOf(splittedCharacters[0])))
+                    );
+                    requestIndex++;
+                }
                 break;
 
         }
