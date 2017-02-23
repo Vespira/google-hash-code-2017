@@ -6,6 +6,10 @@ public class Main {
 
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         ParseInputFile parseInputFile = new ParseInputFile();
-        parseInputFile.parseFile(classLoader.getResource("kittens.in").toString().replace("file:/", ""));
+        String path = classLoader.getResource("kittens.in").toString();
+        if (path.contains("file:/")) {
+            path = path.replace("file:/", "");
+        }
+        parseInputFile.parseFile(path);
     }
 }
