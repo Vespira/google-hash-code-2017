@@ -59,11 +59,11 @@ public class ParseInputFile {
                 }
                 endpointList = new HashMap<>(Integer.valueOf(splittedCharacters[1]));
                 for(int i = 0; i < Integer.valueOf(splittedCharacters[1]); i++) {
-                    endpointList.put(i, new Endpoint(i, null, 0));
+                    endpointList.put(i, new Endpoint(i, new HashMap<>(), 0));
                 }
                 requestList = new ArrayList<>(Integer.valueOf(splittedCharacters[2]));
                 for(int i = 0; i < Integer.valueOf(splittedCharacters[2]); i++) {
-                    requestList.add(new Request(null, 0, null));
+                    requestList.add(new Request(null , 0, null));
                 }
                 cacheList = new HashMap<>(Integer.valueOf(splittedCharacters[3]));
                 for(int i = 0; i < Integer.valueOf(splittedCharacters[3]); i++) {
@@ -80,14 +80,12 @@ public class ParseInputFile {
             //cest parti pour les endpoints
             default:
                 if(newEndpoint == true) {
-                    endpointList.put(indexEndpoint, new Endpoint(indexEndpoint, new HashMap<Cache, Integer>(), Integer.valueOf(splittedCharacters[0])));
+                    endpointList.put(indexEndpoint, new Endpoint(indexEndpoint, new HashMap<>(), Integer.valueOf(splittedCharacters[0])));
                     nextEndpointLines = Integer.valueOf(splittedCharacters[1]);
                     newEndpoint = false;
-                    //si les endpoints sont finis
-                    if(endpointList.size() == indexEndpoint + 1) {
+                    if(endpointList.size() == indexEndpoint) {
                         requestLine = true;
                     }
-                    indexEndpoint++;
                 } else {
                     if(nextEndpointLines == 0) {
                         newEndpoint = true;
@@ -98,6 +96,10 @@ public class ParseInputFile {
                         );
                         nextEndpointLines--;
                     }
+                    //si les endpoints sont finis
+                    if(nextEndpointLines == 0 && endpointList.size() == indexEndpoint) {
+                        requestLine = true;
+                    }
                 }
                 if(requestLine == true) {
                     requestList.add(requestIndex, new Request(
@@ -106,6 +108,9 @@ public class ParseInputFile {
                             videoList.get(Integer.valueOf(splittedCharacters[0])))
                     );
                     requestIndex++;
+                }
+                if(nextEndpointLines == 0) {
+                    indexEndpoint++;
                 }
                 break;
 
