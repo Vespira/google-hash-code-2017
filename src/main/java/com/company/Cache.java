@@ -1,13 +1,13 @@
 package com.company;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
 /**
  * Created by mfreche on 23/02/17.
  */
 @AllArgsConstructor
-@Getter
+@Data
 public class Cache {
 
     int id;
