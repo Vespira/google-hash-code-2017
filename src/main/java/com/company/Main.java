@@ -9,21 +9,23 @@ import java.util.Map;
 
 public class Main {
 
-    static final String BASE_PATH_IN = "/home/mfreche/workspace/github/git/google-hash-code-2017/src/main/resources/";
-    static final String BASE_PATH_OUT = "/home/mfreche/";
+    /*static final String BASE_PATH_IN = "/home/mfreche/workspace/github/git/google-hash-code-2017/src/main/resources/";
+    static final String BASE_PATH_OUT = "/home/mfreche/";*/
     /*static final String BASE_PATH_IN = "D:/workspace/google-hash-code-2017/src/main/resources/";
     static final String BASE_PATH_OUT = "D:/out";*/
+    static final String BASE_PATH_IN = "C:/dev/github/google-hash-code-2017/src/main/resources/";
+    static final String BASE_PATH_OUT = "C:/dev/github/google-hash-code-2017/out/";
 
     public static void main(String[] args)
             throws IOException {
 
         IAlgo algo = new Algo1(20 * 1000);
         //fichierSample(algo);
-        fichierReel(algo, "sampleFile.in");
-        //fichierReel(algo, "kittens.in");
-        /*fichierReel(algo, "me_at_the_zoo.in");
-        fichierReel(algo, "trending_today.in");
-        fichierReel(algo, "videos_worth_spreading.in");*/
+        //fichierReel(algo, "sampleFile.in");
+        fichierReel(algo, "kittens.in");
+        //fichierReel(algo, "me_at_the_zoo.in");
+        //fichierReel(algo, "trending_today.in");
+        //fichierReel(algo, "videos_worth_spreading.in");
 
 
     }
@@ -63,7 +65,8 @@ public class Main {
     private static void fichierReel(IAlgo algo, String fileName)
             throws IOException {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        ParseInputFile parseInputFile = new ParseInputFile();
+        //IParseInputFile parseInputFile = new ParseInputFile();
+        IParseInputFile parseInputFile = new ParserFromScratch();
         //String path = classLoader.getResource("kittens.in").toString();
         String path = BASE_PATH_IN + fileName;
 
@@ -71,6 +74,7 @@ public class Main {
 
 
 
+        System.out.println("Calcul de la meilleure solution...");
         Map<Cache, List<Video>> result = algo.trouveMeilleurSolution(situation);
 
         FileWriter fw = new FileWriter();

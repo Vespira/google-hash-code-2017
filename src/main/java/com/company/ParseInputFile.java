@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 /**
  * Created by Alex on 23/02/2017.
  */
-public class ParseInputFile {
+public class ParseInputFile implements IParseInputFile {
 
     private Situation situation = new Situation();
 
@@ -28,6 +28,7 @@ public class ParseInputFile {
     private boolean requestLine = false;
     private int requestIndex = 0;
 
+    @Override
     public Situation parseFile(String path) {
 
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
