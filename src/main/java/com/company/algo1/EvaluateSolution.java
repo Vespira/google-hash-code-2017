@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 
 public class EvaluateSolution implements IAlgo {
 
+    private List<Integer> videosId = new ArrayList<>();
+
+
     @Override
     public Map<Cache,List<Video>> trouveMeilleurSolution(Situation situation) {
 
@@ -22,9 +25,6 @@ public class EvaluateSolution implements IAlgo {
 
         //map a retourner après opti
         Map<Cache,List<Video>> finalResult = new HashMap<>();
-
-        //TODO a implementer : pour l'instant faire un bete check pour voir si les ID videos sont passés
-        //List<Integer> videosId
 
         // pour chaque endpoint
         for(Map.Entry<Integer, Endpoint> endpoint : situation.getEndpointList().entrySet()) {
@@ -69,6 +69,7 @@ public class EvaluateSolution implements IAlgo {
                     //si on peut tout mettre dans le premier cache
                     if(cache.getSize() >= totalSizeOfVideos) {
                         finalResult.put(cache, videosRequestByEndpoints);
+                        break;
                     } else {
                         //sinon, on essaye d'en mettre un max
                         List<Video> videosToStore = calculateVideosToStore(
@@ -88,7 +89,7 @@ public class EvaluateSolution implements IAlgo {
         return finalResult;
     }
 
-    private static List<Video> calculateVideosToStore(int cacheNumber, int cacheSize, List<Video> videosRequestByEndpoints) {
+    private List<Video> calculateVideosToStore(int cacheNumber, int cacheSize, List<Video> videosRequestByEndpoints) {
 
         //on doit recalculer ca, car la liste se réduit petit a petit
         int newTotalSizeOfVideos = videosRequestByEndpoints.stream().mapToInt(v -> v.getSize()).sum();
@@ -101,7 +102,7 @@ public class EvaluateSolution implements IAlgo {
         //if((cacheNumber * cacheSize) - newTotalSizeOfVideos >= 0) {
             for(Video video : videosRequestByEndpoints) {
                 // si la taille de la video rentre dans le cache (double check)
-                if(video.getSize() <= cacheSize) {
+                if(video.getSize() <= cacheSize || !videosId.contains(video.getId())) {
                     if (cacheSize >= video.getSize() + usedSize) {
                         videosToStore.add(video);
                         usedSize += video.getSize();

@@ -23,9 +23,9 @@ public class Main {
         //IAlgo algo = new Algo1(20 * 1000);
         //fichierSample(algo);
         IAlgo algo = new EvaluateSolution();
-        //fichierReel(algo, "kittens.in");
         //fichierReel(algo, "sampleFile.in");
-        //fichierReel(algo, "me_at_the_zoo.in");
+        //fichierReel(algo, "kittens.in");
+        fichierReel(algo, "me_at_the_zoo.in");
         //fichierReel(algo, "trending_today.in");
         //fichierReel(algo, "videos_worth_spreading.in");
 
