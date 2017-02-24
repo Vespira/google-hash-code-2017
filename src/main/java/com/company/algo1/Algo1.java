@@ -47,6 +47,7 @@ public class Algo1 implements IAlgo {
         try {
             bigExecutor.awaitTermination(timeout, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         bigExecutor.shutdownNow();

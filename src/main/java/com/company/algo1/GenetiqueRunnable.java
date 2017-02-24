@@ -20,7 +20,7 @@ public final class GenetiqueRunnable implements Runnable {
     public void run() {
         while (true) {
             if (Thread.currentThread().isInterrupted()) break;
-            innerPop = Algorithm.evolvePopulation(innerPop, tableau, 50);
+            innerPop = Algorithm.evolvePopulation(innerPop, tableau, 45);
             generationCount++;
         }
     }
