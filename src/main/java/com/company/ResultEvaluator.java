@@ -23,6 +23,7 @@ public class ResultEvaluator {
                     .collect(Collectors.toList());
 
             Map<Video, Integer> row = situation.getTableRequest().row(endpoint);
+            totalNbReq += row.values().stream().mapToInt(Integer::intValue).sum();
             Set<Video> videosRecherchees = new HashSet<>(row.keySet());
             for ( Map.Entry<Cache, Integer> cacheConnexion : sortedEntries ) {
                 Set<Video> videosSurLeCache = mapCacheVideos.get(cacheConnexion.getKey());
@@ -33,7 +34,7 @@ public class ResultEvaluator {
                     int economie = latenceDirecte - cacheConnexion.getValue();
                     Integer nbReq = row.get(v);
                     totalScore += economie * nbReq;
-                    totalNbReq += nbReq;
+                    // totalNbReq += nbReq;
                 }
                 if ( videosRecherchees.isEmpty() ) {
                     break;

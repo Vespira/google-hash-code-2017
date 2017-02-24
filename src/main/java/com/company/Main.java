@@ -33,6 +33,17 @@ public class Main {
 
     private static void fichierSample(IAlgo algo)
             throws IOException {
+        Situation situation = creerSituationSample();
+
+        debugMsg(situation);
+
+        Map<Cache, ? extends Collection<Video>> result = algo.trouveMeilleurSolution(situation);
+
+        FileWriter fw = new FileWriter();
+        fw.ecrireFichierResultat(BASE_PATH_OUT+"sample.out",result);
+    }
+
+    public static Situation creerSituationSample() {
         Situation situation = new Situation();
         situation.getVideoList().add(new Video(0,50));
         situation.getVideoList().add(new Video(1,50));
@@ -47,7 +58,7 @@ public class Main {
         cacheConnexion.put(situation.getCacheList().get(1), 300);
         cacheConnexion.put(situation.getCacheList().get(2), 200);
         situation.getEndpointList().put(0,new Endpoint(0, cacheConnexion, 1000));
-        situation.getEndpointList().put(1,new Endpoint(1, cacheConnexion, 500));
+        situation.getEndpointList().put(1,new Endpoint(1, new HashMap<>(), 500));
         situation.getTableRequest().put(
                 situation.getEndpointList().get(0),
                 situation.getVideoList().get(3),
@@ -64,13 +75,7 @@ public class Main {
                 situation.getEndpointList().get(0),
                 situation.getVideoList().get(1),
                 1000);
-
-        debugMsg(situation);
-
-        Map<Cache, ? extends Collection<Video>> result = algo.trouveMeilleurSolution(situation);
-
-        FileWriter fw = new FileWriter();
-        fw.ecrireFichierResultat(BASE_PATH_OUT+"sample.out",result);
+        return situation;
     }
 
     private static void fichierReel(IAlgo algo, String fileName)
