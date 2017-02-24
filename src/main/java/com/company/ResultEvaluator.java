@@ -49,32 +49,6 @@ public class ResultEvaluator {
     }
 
 
-    private static Integer findPlusRapide(Map<String, Integer> mapLatences, Map<Cache, Set<Video>> mapCacheVideos, Request req) {
-        String key = req.getFrom().getId() + " " + req.getVid().getId();
-        if ( !mapLatences.containsKey(key) ) {
-            Endpoint end = req.getFrom();
-            alimenterMapLatencePourEndpoint(end, mapLatences, mapCacheVideos);
-        }
-        return mapLatences.get(key);
-    }
 
-    private static void alimenterMapLatencePourEndpoint(Endpoint endpoint, Map<String, Integer> mapLatences,
-            Map<Cache, Set<Video>> mapCacheVideos) {
-        for ( Map.Entry<Cache, Integer> cacheConnexion : endpoint.cacheConnexions.entrySet() ) {
-            Set<Video> videoDispos = mapCacheVideos.get(cacheConnexion.getKey());
-            parcoureVideosDansUnCache(endpoint, mapLatences, cacheConnexion, videoDispos);
-        }
-    }
-
-    private static void parcoureVideosDansUnCache(Endpoint endpoint, Map<String, Integer> mapLatences,
-            Map.Entry<Cache, Integer> cacheConnexion, Set<Video> videoDispos) {
-        for ( Video v : videoDispos ) {
-            String key2 = endpoint.getId() + " " + v.getId();
-            Integer meilleureLatence = mapLatences.get(key2);
-            if ( meilleureLatence == null || cacheConnexion.getValue() < meilleureLatence ) {
-                mapLatences.put(key2, cacheConnexion.getValue());
-            }
-        }
-    }
 
 }

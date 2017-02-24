@@ -10,12 +10,12 @@ import java.util.Map;
 
 public class Main {
 
-    static final String BASE_PATH_IN = "/home/mfreche/workspace/github/git/google-hash-code-2017/src/main/resources/";
-    static final String BASE_PATH_OUT = "/home/mfreche/";
+    /*static final String BASE_PATH_IN = "/home/mfreche/workspace/github/git/google-hash-code-2017/src/main/resources/";
+    static final String BASE_PATH_OUT = "/home/mfreche/";*/
     /*static final String BASE_PATH_IN = "D:/workspace/google-hash-code-2017/src/main/resources/";
     static final String BASE_PATH_OUT = "D:/out";*/
-    /*static final String BASE_PATH_IN = "C:/dev/github/google-hash-code-2017/src/main/resources/";
-    static final String BASE_PATH_OUT = "C:/dev/github/google-hash-code-2017/out/";*/
+    static final String BASE_PATH_IN = "C:/dev/github/google-hash-code-2017/src/main/resources/";
+    static final String BASE_PATH_OUT = "C:/dev/github/google-hash-code-2017/out/";
 
     public static void main(String[] args)
             throws IOException {
@@ -77,7 +77,6 @@ public class Main {
             throws IOException {
         System.out.println("Traitement du fichier "+fileName);
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        //IParseInputFile parseInputFile = new ParseInputFile();
         IParseInputFile parseInputFile = new ParserFromScratch();
         //String path = classLoader.getResource("kittens.in").toString();
         String path = BASE_PATH_IN + fileName;

@@ -44,8 +44,7 @@ public class ParserFromScratch implements IParseInputFile {
         return null;
     }
 
-    private Collection<? extends Request> traiteLignesRequest(Situation situation, BufferedReader in, int nbRequest) throws IOException {
-        List<Request> lstRequest = new ArrayList<>();
+    private void traiteLignesRequest(Situation situation, BufferedReader in, int nbRequest) throws IOException {
         for ( int i = 0 ; i < nbRequest ; i ++ ){
             String[] str = in.readLine().split(" ");
             Endpoint from = situation.getEndpointList().get(Integer.valueOf(str[1]));
@@ -57,7 +56,6 @@ public class ParserFromScratch implements IParseInputFile {
                 situation.getTableRequest().put(from, vid, nbRequests);
             }
         }
-        return lstRequest;
     }
 
     private Map<? extends Integer,? extends Endpoint> traiteLignesEndPoint(Map<Integer, Cache> mapCache, BufferedReader in, int nbEndpoints) throws IOException {
