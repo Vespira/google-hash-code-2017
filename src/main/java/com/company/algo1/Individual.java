@@ -4,11 +4,7 @@ import com.company.Cache;
 import com.company.ResultEvaluator;
 import com.company.Video;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.*;
 
 public  class Individual
         implements Comparable<Individual> {
@@ -35,17 +31,7 @@ public  class Individual
         }
     }
 
-    public void generateIndividualFromLast(Individual indiv) {
-        recupVieux = true;
-        for (int i = 0; i < size(); i++) {
-            if (i+1 < indiv.size()) {
-                genes[i] = indiv.getGene(i + 1);
-            } else {
-                Gene action = generateGene(i);
-                genes[i] = action;
-            }
-        }
-    }
+
 
     public Gene generateGene(int index) {
         Cache cache = pop.situation.getCacheList().get(index);
@@ -80,15 +66,15 @@ public  class Individual
         return competence;
     }
 
-    private Map<Cache,List<Video>> genesToMap(Gene[] genes) {
-        Map<Cache,List<Video>> result = new HashMap<>();
+    private Map<Cache,Set<Video>> genesToMap(Gene[] genes) {
+        Map<Cache,Set<Video>> result = new HashMap<>();
         for ( int i = 0 ; i < genes.length ; i++ ) {
             result.put(genes[i].getCache(), genes[i].getVideoList());
         }
         return result;
     }
 
-    public Map<Cache,List<Video>> genesToMap() {
+    public Map<Cache,Set<Video>> genesToMap() {
         return genesToMap(getGenes());
     }
 
@@ -110,7 +96,7 @@ public  class Individual
         if (Arrays.equals(this.genes, o.genes)) {
             return 0;
         }
-        return this.getCompetence().compareTo(o.getCompetence());
+        return o.getCompetence().compareTo(this.getCompetence());
     }
 
 

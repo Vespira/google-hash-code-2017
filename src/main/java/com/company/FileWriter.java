@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -13,12 +14,12 @@ import java.util.Map;
  */
 public class FileWriter {
 
-    public void ecrireFichierResultat(String fileName, Map<Cache,List<Video>> resultat)
+    public void ecrireFichierResultat(String fileName, Map<Cache,? extends Collection<Video>> resultat)
             throws IOException {
         Path path = Paths.get(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             writer.write(String.valueOf(resultat.size()));
-            for ( Map.Entry<Cache,List<Video>> entry : resultat.entrySet() ) {
+            for ( Map.Entry<Cache,? extends Collection<Video>> entry : resultat.entrySet() ) {
                 writer.newLine();
                 writer.write(String.valueOf(entry.getKey().getId()));
                 for ( Video v : entry.getValue() ) {

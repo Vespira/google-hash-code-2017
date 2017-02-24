@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mfreche on 23/02/17.
@@ -16,5 +17,5 @@ import java.util.List;
 public class Gene {
 
     Cache cache;
-    List<Video> videoList;
+    Set<Video> videoList;
 }

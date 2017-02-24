@@ -1,5 +1,7 @@
 package com.company;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +19,6 @@ public class Situation {
 
     Map<Integer, Cache> cacheList = new HashMap<>();
     Map<Integer,Endpoint> endpointList = new HashMap<>();
-    List<Request> requestList = new ArrayList<>();
+    Table<Endpoint, Video, Integer> tableRequest = HashBasedTable.create();
     List<Video> videoList = new ArrayList<>();
 }

@@ -34,7 +34,7 @@ public class ParserFromScratch implements IParseInputFile {
 
             situation.getVideoList().addAll(traiteLigneVideos(in.readLine().split(" ")));
             situation.getEndpointList().putAll(traiteLignesEndPoint(situation.getCacheList(), in,nbEndpoints));
-            situation.getRequestList().addAll(traiteLignesRequest(situation.getEndpointList(), situation.getVideoList(), in, nbRequest));
+            traiteLignesRequest(situation, in, nbRequest);
 
             return situation;
 
@@ -44,11 +44,18 @@ public class ParserFromScratch implements IParseInputFile {
         return null;
     }
 
-    private Collection<? extends Request> traiteLignesRequest(Map<Integer, Endpoint> mapEndpoints, List<Video> lstVideo, BufferedReader in, int nbRequest) throws IOException {
+    private Collection<? extends Request> traiteLignesRequest(Situation situation, BufferedReader in, int nbRequest) throws IOException {
         List<Request> lstRequest = new ArrayList<>();
         for ( int i = 0 ; i < nbRequest ; i ++ ){
             String[] str = in.readLine().split(" ");
-            lstRequest.add(new Request(mapEndpoints.get(Integer.valueOf(str[1])), Integer.valueOf(str[2]), lstVideo.get(Integer.valueOf(str[0]))));
+            Endpoint from = situation.getEndpointList().get(Integer.valueOf(str[1]));
+            Integer nbRequests = Integer.valueOf(str[2]);
+            Video vid = situation.getVideoList().get(Integer.valueOf(str[0]));
+            if ( situation.getTableRequest().contains(from,vid) ) {
+                situation.getTableRequest().put(from, vid, situation.getTableRequest().get(from,vid) + nbRequests);
+            } else {
+                situation.getTableRequest().put(from, vid, nbRequests);
+            }
         }
         return lstRequest;
     }

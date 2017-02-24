@@ -41,7 +41,6 @@ public class ParseInputFile implements IParseInputFile {
 
         situation.setVideoList(videoList);
         situation.setEndpointList(endpointList);
-        situation.setRequestList(requestList);
         situation.setCacheList(cacheList);
         System.out.println("DONE");
         return situation;
@@ -89,7 +88,11 @@ public class ParseInputFile implements IParseInputFile {
                     }
                 } else {
                     if(nextEndpointLines == 0) {
-                        newEndpoint = true;
+                        if ( endpointList.size() == indexEndpoint ) {
+                            requestLine = true;
+                        } else {
+                            newEndpoint = true;
+                        }
                     } else {
                         endpointList.get(indexEndpoint).getCacheConnexions().put(
                                 cacheList.get(Integer.valueOf(splittedCharacters[0])),
@@ -101,6 +104,10 @@ public class ParseInputFile implements IParseInputFile {
                     if(nextEndpointLines == 0 && endpointList.size() == indexEndpoint) {
                         requestLine = true;
                     }
+                    if ( nextEndpointLines == 0 ) {
+                        newEndpoint = true;
+                        indexEndpoint++;
+                    }
                 }
                 if(requestLine == true) {
                     requestList.add(requestIndex, new Request(
@@ -109,9 +116,6 @@ public class ParseInputFile implements IParseInputFile {
                             videoList.get(Integer.valueOf(splittedCharacters[0])))
                     );
                     requestIndex++;
-                }
-                if(nextEndpointLines == 0) {
-                    indexEndpoint++;
                 }
                 break;
 

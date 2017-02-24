@@ -1,6 +1,8 @@
 package com.company.algo1;
 
 import com.company.Situation;
+import com.company.Video;
+import lombok.Getter;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -9,11 +11,9 @@ public class Population {
 
     SortedSet<Individual> individuals;
     Situation situation;
-    List<Map.Entry<Integer, Integer>> nextBlocks;
-    double nuisanceAdv;
-    double maNuisance;
-    List<Integer> lstScoresAdverses;
-    public int scoreMaxi;
+
+
+
 
     /*
      * Constructor
@@ -22,6 +22,9 @@ public class Population {
     public Population(int populationSize, boolean initialise, Situation situation) {
         this.situation = situation;
         individuals = new TreeSet<>();
+
+
+
 
         // Initialise population
         if (initialise) {
@@ -33,6 +36,8 @@ public class Population {
             }
         }
     }
+
+
 
 		/* Getters */
     //        public Individual getIndividual(int index) {
