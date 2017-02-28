@@ -32,8 +32,6 @@ public class Algo1 implements IAlgo {
         Population myPop = new Population(50, true, situation);
         // Evolve our population until we reach an optimum solution
 
-
-
         ExecutorService bigExecutor = Executors.newSingleThreadExecutor();
         GenetiqueRunnable genetiqueRunnable = new GenetiqueRunnable(situation, myPop);
         bigExecutor.submit(genetiqueRunnable);
